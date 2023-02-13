@@ -1,26 +1,34 @@
-﻿var name = "Przemek";
-var age = 50;
-var isWoman = false;
+﻿using System.Diagnostics.Metrics;
+using System.Runtime.InteropServices;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
-if (age >= 0)
+int number = 41562600;
+string numberToString = number.ToString();
+char[] numbersAsLetters = numberToString.ToArray();
+List<int> counterList = new List<int>();
+
+Console.WriteLine("Wynik dla liczby: " + number);
+
+Console.WriteLine("");
+Console.WriteLine("--- ilości poszczególnych cyfr nie przechowywane w zmiennych ---");
+
+for (var digit = 0; digit < 10; digit++)
 {
-    if (isWoman && age < 30)
+    var counter = 0;
+    foreach (var chars in numbersAsLetters)
     {
-        Console.WriteLine("Kobieta poniżej 30 lat. Dodam jeszcze że ma na imię " + name);
+        if (Convert.ToString(chars) == Convert.ToString(digit)) counter++;
     }
-    else if (isWoman && name == "Ewa" && age == 33)
-    {
-        Console.WriteLine(name + ", lat " + age + ".");
-    }
-    else if (!isWoman && age < 18)
-    {
-        Console.WriteLine("Niepełnoletni Mężczyzna. " + name + ", wiek: " + age + " lat.");
-    }
-    else if (name == "Przemek" && age == 50 && !isWoman)
-    {
-        Console.WriteLine("To jest " + name + "! " + age + " letni początkujący programista :D");
-    }
-    else Console.WriteLine("Nie mam zielonego pojęcia kim Ty jesteś :O");
-}
-else Console.WriteLine("Weź nie ściemniaj - nie można mieć " + age + " lat!");
 
+    Console.WriteLine(digit + " => " + counter);
+
+    counterList.Add(counter);
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- ilości poszczególnych cyfr przechowywane w liście ---");
+
+for (var digit2 = 0; digit2 <= 9; digit2++)
+{
+    Console.WriteLine(digit2 + " => " + counterList[digit2]);
+}
